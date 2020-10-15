@@ -7,6 +7,7 @@ import { Grafica1Component } from './grafica1/grafica1.component';
 import { MainPagesComponent } from './main-pages.component';
 import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { ComponentsModule } from '../components/components.module';
     DashboardComponent,
     Grafica1Component,
     MainPagesComponent,
+    AccountSettingsComponent,
   ],
   exports: [
     ProgressComponent,

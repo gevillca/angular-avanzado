@@ -8,13 +8,17 @@
     </div>
     <ul class="sidebar-menu">
       <li class="menu-header">Dashboard</li>
-      <li class="nav-item dropdown">
-        <a href="#" class="nav-link has-dropdown"
-          ><i class="fas fa-fire"></i><span>Dashboard</span></a
+      <li class="nav-item dropdown" *ngFor="let items of menuItems">
+        <a class="nav-link has-dropdown"
+          ><i class="fas fa-fire"></i><span>{{ items.titulo }} </span></a
         >
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="index-0.html">General Dashboard</a></li>
-          <li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li>
+          <li *ngFor="let submenu of items.submenu">
+            <a class="nav-link" [routerLink]="submenu.url">
+              {{ submenu.titulo }}</a
+            >
+          </li>
+          <!-- <li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li> -->
         </ul>
       </li>
       <li class="menu-header">Starter</li>
