@@ -43,12 +43,12 @@ $(function() {
           active = true;
         }
         
-        $('.main-sidebar .sidebar-menu li.active > .dropdown-menu').slideUp(500, function() {
-          update_sidebar_nicescroll();          
-          return false;
-        });
+        // $('.main-sidebar .sidebar-menu li.active > .dropdown-menu').slideUp(500, function() {
+        //   update_sidebar_nicescroll();          
+        //   return false;
+        // });
         
-        $('.main-sidebar .sidebar-menu li.active').removeClass('active');
+        // $('.main-sidebar .sidebar-menu li.active').removeClass('active');
 
         if(active==true) {
           me.parent().removeClass('active');          

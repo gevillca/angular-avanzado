@@ -13,10 +13,12 @@
           ><i class="fas fa-fire"></i><span>{{ items.titulo }} </span></a
         >
         <ul class="dropdown-menu">
-          <li *ngFor="let submenu of items.submenu">
-            <a class="nav-link" [routerLink]="submenu.url">
-              {{ submenu.titulo }}</a
-            >
+          <li
+            *ngFor="let submenu of items.submenu"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a [routerLink]="submenu.url"> {{ submenu.titulo }}</a>
           </li>
           <!-- <li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li> -->
         </ul>
