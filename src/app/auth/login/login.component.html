@@ -16,24 +16,30 @@
         <div class="card-header"><h4>Login</h4></div>
 
         <div class="card-body">
-          <form class="needs-validation" (submit)="login()">
+          <form
+            class="needs-validation"
+            (ngSubmit)="login()"
+            autocomplete="off"
+            [formGroup]="loginForm"
+          >
             <div class="form-group">
-              <label for="email">Email</label>
+              <label for="user_email">Email</label>
               <input
                 id="email"
                 type="email"
                 class="form-control"
-                name="email"
-                tabindex="1"
-                required
-                autofocus
+                name="user_email"
+                placeholder="Email"
+                formControlName="user_email"
               />
               <div class="invalid-feedback">Please fill in your email</div>
             </div>
 
             <div class="form-group">
               <div class="d-block">
-                <label for="password" class="control-label">Password</label>
+                <label for="user_password" class="control-label"
+                  >Password</label
+                >
                 <div class="float-right">
                   <a href="auth-forgot-password.html" class="text-small">
                     Forgot Password?
@@ -44,11 +50,20 @@
                 id="password"
                 type="password"
                 class="form-control"
-                name="password"
-                tabindex="2"
-                required
+                name="user_password"
+                placeholder="Password"
+                formControlName="user_password"
               />
               <div class="invalid-feedback">please fill in your password</div>
+            </div>
+
+            <div class="row">
+              <div
+                class="col-xs12 col-sm-12 col-md-12 m-t-10 text-center mb-4"
+                id="google-btn"
+              >
+                <div id="my-signin2">ss</div>
+              </div>
             </div>
 
             <div class="form-group">
@@ -59,6 +74,7 @@
                   class="custom-control-input"
                   tabindex="3"
                   id="remember-me"
+                  formControlName="remember"
                 />
                 <label class="custom-control-label" for="remember-me"
                   >Remember Me</label
@@ -79,22 +95,10 @@
           <div class="text-center mt-4 mb-3">
             <div class="text-job text-muted">Login With Social</div>
           </div>
-          <div class="row sm-gutters">
-            <div class="col-6">
-              <a class="btn btn-block btn-social btn-facebook">
-                <span class="fab fa-facebook"></span> Facebook
-              </a>
-            </div>
-            <div class="col-6">
-              <a class="btn btn-block btn-social btn-twitter">
-                <span class="fab fa-twitter"></span> Twitter
-              </a>
-            </div>
-          </div>
         </div>
       </div>
       <div class="mt-5 text-muted text-center">
-        Don't have an account? <a href="auth-register.html">Create One</a>
+        Don't have an account? <a routerLink="/register">Create One</a>
       </div>
       <div class="simple-footer">Copyright &copy; Stisla 2018</div>
     </div>
