@@ -6,6 +6,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,11 @@ const routes: Routes = [
         path: 'account-settings',
         component: AccountSettingsComponent,
         data: { titulo: 'Ajuste de Cuenta' },
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        data: { titulo: 'Perfil de Usuario' },
       },
       //   { path: '', pathMatch: 'full', redirectTo: '/dashboard' },
     ],

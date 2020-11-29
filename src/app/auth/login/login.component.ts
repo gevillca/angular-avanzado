@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.loginForm.value);
     this.userService.login(this.loginForm.value).subscribe(
       (resp) => {
         if (this.loginForm.get('remember').value) {

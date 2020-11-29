@@ -10,3 +10,9 @@
 .cursor {
   cursor: pointer;
 }
+
+.img-avatar {
+  height: 150px;
+  width: 150px;
+  align-items: center;
+}

@@ -1,0 +1,108 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <form
+        [formGroup]="profileForm"
+        (submit)="updateProfile()"
+        class="needs-validation"
+        novalidate=""
+      >
+        <div class="card-body">
+          <h4>Mi perfil de usuario</h4>
+          <br />
+          <div class="row">
+            <div class="form-group col-md-12 col-12">
+              <label for="name">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder="Nombre"
+                formControlName="user_name"
+              />
+              <div class="invalid-feedback">Please fill in the first name</div>
+            </div>
+            <div class="form-group col-md-12 col-12">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                placeholder="Email"
+                formControlName="user_email"
+                [readOnly]="user.user_google"
+              />
+              <div class="invalid-feedback">Please fill in the email</div>
+            </div>
+            <!-- <div class="form-group col-md-6 col-12">
+              <label>Last Name</label>
+              <input
+                type="text"
+                class="form-control"
+                value="Maman"
+                required=""
+              />
+              <div class="invalid-feedback">Please fill in the last name</div>
+            </div> -->
+          </div>
+        </div>
+        <div class="card-footer text-right">
+          <button
+            [disabled]="profileForm.invalid"
+            type="submit"
+            class="btn btn-success btn-block"
+          >
+            <i class="fa fa-save"> </i>
+            Guardar Cambios
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <!-- <div class="card-header"> -->
+        <h4>Avatar</h4>
+        <!-- </div> -->
+        <p class="card-text">Imagen del Usuario</p>
+        <!-- <figure class="avatar mr-5 avatar-xl center-block"> -->
+        <div class="text-center">
+          <img
+            *ngIf="!imgTemp"
+            [src]="user.getImage"
+            class="img-avatar img-thumbnail"
+          />
+          <img
+            *ngIf="imgTemp"
+            [src]="imgTemp"
+            class="img-avatar img-thumbnail"
+          />
+        </div>
+        <!-- </figure> -->
+        <!-- <input type="file" name="" id="" /> -->
+        <div class="custom-file mt-3">
+          <input
+            type="file"
+            name="site_favicon"
+            class="custom-file-input"
+            id="site-favicon"
+            (change)="onFileSelected($event)"
+          />
+          <label class="custom-file-label">Choose File</label>
+        </div>
+        <div class="card-footer text-right">
+          <button
+            (click)="onUploadFile()"
+            [disabled]="!selectedFile"
+            class="btn btn-success btn-block"
+          >
+            <i class="fa fa-save"> </i>
+            Guarda Imagen
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

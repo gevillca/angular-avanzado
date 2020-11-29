@@ -8,6 +8,8 @@ import { MainPagesComponent } from './main-pages.component';
 import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     Grafica1Component,
     MainPagesComponent,
     AccountSettingsComponent,
+    ProfileComponent,
   ],
   exports: [
     ProgressComponent,
@@ -24,6 +27,12 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     MainPagesComponent,
   ],
 
-  imports: [CommonModule, SharedModule, RouterModule, ComponentsModule],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule,
+    ComponentsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class MainPagesModule {}
