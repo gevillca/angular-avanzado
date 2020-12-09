@@ -16,3 +16,27 @@
   width: 150px;
   align-items: center;
 }
+
+.w100 {
+  width: 100px;
+}
+.w150 {
+  width: 150px;
+}
+
+.avatar {
+  border-radius: 100%;
+  width: 35px;
+}
+.oculto {
+  display: none;
+}
+.fondo-modal-imagen {
+  background-color: rgba(0, 0, 0, 0.418) !important;
+  left: 0px;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 9999;
+}

@@ -8,6 +8,9 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { AuthGuard } from '../guards/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
 
+// Mantenimientos
+import { UsersComponent } from './mantenimientos/users/users.component';
+
 const routes: Routes = [
   {
     path: 'dashboard',
@@ -39,7 +42,13 @@ const routes: Routes = [
         component: ProfileComponent,
         data: { titulo: 'Perfil de Usuario' },
       },
-      //   { path: '', pathMatch: 'full', redirectTo: '/dashboard' },
+
+      // Mantenimientos
+      {
+        path: 'users',
+        component: UsersComponent,
+        data: { titulo: 'Usuario de Aplicacion' },
+      },
     ],
   },
 ];

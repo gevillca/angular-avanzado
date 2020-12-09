@@ -8,6 +8,7 @@ import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../models/users.models';
 import { helpers } from 'chart.js';
+import { LoadUser } from '../interfaces/users-form.interface';
 const base_url = environment.base_url;
 
 declare const gapi: any;
@@ -31,6 +32,15 @@ export class UsersService {
   get user_id(): string {
     return this.usuario.user_id;
   }
+
+  get headers() {
+    return {
+      headers: {
+        'x-token': this.token,
+      },
+    };
+  }
+
   googleInnit() {
     return new Promise((resolve) => {
       gapi.load('auth2', () => {
@@ -103,16 +113,15 @@ export class UsersService {
     );
   }
   updatedProfile(data: {
-    user_name: string;
-    user_email: string;
-    user_role: string;
+    // user_name: string;
+    // user_email: string;
+    // user_role: string;
   }) {
     return this.http.put(
       `${base_url}/users/${this.user_id}`,
-      (data = { ...data, user_role: this.usuario.user_role }),
-      {
-        headers: { 'x-token': this.token },
-      }
+      data,
+      // (data = { ...data, user_role: this.usuario.user_role }),
+      this.headers
     );
   }
 
@@ -128,6 +137,49 @@ export class UsersService {
       tap((resp: any) => {
         localStorage.setItem('token', resp.token);
       })
+    );
+  }
+
+  getUsers(desde: number = 0) {
+    return this.http
+      .get<LoadUser>(`${base_url}/users?desde=${desde}`, this.headers)
+      .pipe(
+        map((res) => {
+          const usuarios = res.data.map(
+            (usuario) =>
+              new User(
+                usuario.user_name,
+                usuario.user_email,
+                '',
+                usuario.user_google,
+                usuario.user_img,
+                usuario.user_role,
+                usuario.user_state,
+                usuario.user_created,
+                usuario.user_updated,
+                usuario.user_id
+              )
+          );
+
+          return {
+            total: res.total,
+            data: usuarios,
+          };
+        })
+      );
+  }
+
+  deleteUser(user_id: string) {
+    return this.http.delete(`${base_url}/users/${user_id}`, {
+      headers: { 'x-token': this.token },
+    });
+  }
+  saveUserRole(user: User) {
+    return this.http.put(
+      `${base_url}/users/${user.user_id}`,
+      user,
+      // (data = { ...data, user_role: this.usuario.user_role }),
+      this.headers
     );
   }
 }

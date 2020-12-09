@@ -34,13 +34,11 @@ export class ProfileComponent implements OnInit {
     });
   }
   updateProfile() {
-    console.log(this.profileForm.value);
     this.userService.updatedProfile(this.profileForm.value).subscribe(
       (res) => {
         const { user_name, user_email } = this.profileForm.value;
         this.user.user_name = user_name;
         this.user.user_email = user_email;
-        console.log(res);
 
         Swal.fire('Guardado', 'Cambios fueron guardados', 'success');
       },
@@ -66,7 +64,7 @@ export class ProfileComponent implements OnInit {
   onUploadFile() {
     const fd = new FormData();
     fd.append('imagen', this.selectedFile);
-    this.fileUploadService.onUpload(this.user.user_id, fd).subscribe(
+    this.fileUploadService.onUploadUser(this.user.user_id, fd).subscribe(
       (res: any) => {
         this.user.user_img = res.nameFile;
         Swal.fire('Guardado', 'Imagen actualizada', 'success');

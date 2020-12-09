@@ -8,9 +8,12 @@
     </div>
     <ul class="sidebar-menu">
       <li class="menu-header">Dashboard</li>
+
       <li class="nav-item dropdown" *ngFor="let items of menuItems">
-        <a class="nav-link has-dropdown"
-          ><i class="fas fa-fire"></i><span>{{ items.titulo }} </span></a
+        <a class="nav-link has-dropdown cursor"
+          ><i [class]="items.icono"></i> &nbsp;<span
+            >{{ items.titulo }}
+          </span></a
         >
         <ul class="dropdown-menu">
           <li

@@ -23,6 +23,24 @@ export class SidebarService {
         },
       ],
     },
+    {
+      titulo: 'Mantenimientos',
+      icono: 'fas fa-folder',
+      submenu: [
+        {
+          titulo: 'Usuarios',
+          url: 'users',
+        },
+        {
+          titulo: 'Hospitales',
+          url: 'hospitales',
+        },
+        {
+          titulo: 'Medicos',
+          url: 'Medicos',
+        },
+      ],
+    },
   ];
 
   constructor() {}

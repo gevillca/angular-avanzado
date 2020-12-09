@@ -9,7 +9,8 @@ import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { UsersComponent } from './mantenimientos/users/users.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MainPagesComponent,
     AccountSettingsComponent,
     ProfileComponent,
+    UsersComponent,
   ],
   exports: [
     ProgressComponent,
@@ -33,6 +35,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     ComponentsModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
 })
 export class MainPagesModule {}
