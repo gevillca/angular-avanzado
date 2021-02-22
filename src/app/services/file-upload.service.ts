@@ -11,8 +11,8 @@ export class FileUploadService {
     return localStorage.getItem('token' || '');
   }
 
-  onUploadUser(user_id: string, fd) {
-    return this.http.put(`${base_url}/upload/users/${user_id}`, fd, {
+  onUploadUser(user_id: string, tipo: string, fd) {
+    return this.http.put(`${base_url}/upload/${tipo}/${user_id}`, fd, {
       headers: { 'x-token': this.token },
     });
   }

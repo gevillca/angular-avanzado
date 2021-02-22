@@ -64,14 +64,16 @@ export class ProfileComponent implements OnInit {
   onUploadFile() {
     const fd = new FormData();
     fd.append('imagen', this.selectedFile);
-    this.fileUploadService.onUploadUser(this.user.user_id, fd).subscribe(
-      (res: any) => {
-        this.user.user_img = res.nameFile;
-        Swal.fire('Guardado', 'Imagen actualizada', 'success');
-      },
-      (err) => {
-        console.log('error', err);
-      }
-    );
+    this.fileUploadService
+      .onUploadUser(this.user.user_id, 'users', fd)
+      .subscribe(
+        (res: any) => {
+          this.user.user_img = res.nameFile;
+          Swal.fire('Guardado', 'Imagen actualizada', 'success');
+        },
+        (err) => {
+          console.log('error', err);
+        }
+      );
   }
 }

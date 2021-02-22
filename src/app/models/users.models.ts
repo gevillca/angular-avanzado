@@ -13,21 +13,18 @@ export class User {
     public user_updated?: string,
     public user_id?: string
   ) {}
-  get getImage() {
-    //  http://localhost:3005/api/upload/users/no-image
-
-    if (!this.user_img) {
-      return `${base_url}/upload/users/no-image`;
-    }
-
-    if (this.user_img.includes('https')) {
-      return this.user_img;
-    }
-
-    if (this.user_img) {
-      return `${base_url}/upload/users/${this.user_img}`;
-    } else {
-      return `${base_url}/upload/users/no-image`;
-    }
-  }
+  // get getImage() {
+  //  http://localhost:3005/api/upload/users/no-image
+  // if (!this.user_img) {
+  //   return `${base_url}/upload/users/no-image`;
+  // }
+  // if (this.user_img.includes('https')) {
+  //   return this.user_img;
+  // }
+  // if (this.user_img) {
+  //   return `${base_url}/upload/users/${this.user_img}`;
+  // } else {
+  //   return `${base_url}/upload/users/no-image`;
+  // }
+  // }
 }

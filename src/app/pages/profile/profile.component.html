@@ -71,7 +71,7 @@
         <div class="text-center">
           <img
             *ngIf="!imgTemp"
-            [src]="user.getImage"
+            [src]="user.user_img | imagen: 'users'"
             class="img-avatar img-thumbnail"
           />
           <img

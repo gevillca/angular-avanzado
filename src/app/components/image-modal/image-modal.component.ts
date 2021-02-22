@@ -44,9 +44,10 @@ export class ImageModalComponent implements OnInit {
   onUploadFile() {
     const fd = new FormData();
     const user_id = this.modalImagenService.user_id;
+    const tipo = this.modalImagenService.tipo;
     // const user_img=this.modalImagenService.user_img
     fd.append('imagen', this.selectedFile);
-    this.fileUploadService.onUploadUser(user_id, fd).subscribe(
+    this.fileUploadService.onUploadUser(user_id, tipo, fd).subscribe(
       (res: any) => {
         // this.user.user_img = res.nameFile;
         Swal.fire('Guardado', 'Imagen actualizada', 'success');

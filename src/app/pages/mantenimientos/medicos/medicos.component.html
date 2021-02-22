@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input
+          class="form-control"
+          type="text"
+          name=""
+          placeholder="Buscar Medico"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="alert alert-info text-center">
+      <h4 class="alert-heading">Cargando</h4>
+      <!-- <i class="fas fa-spinner fas fa-sync fas-2x"></i> -->
+      <i class="fas fa-spinner fa-spin fa-5x"></i>
+      <!-- <i class="fas fa-camera fa-10x"></i> -->
+      <!-- <i class="fas fa-sync fa-5x"></i> -->
+      <p class="mb-0">Por favor Espere</p>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4>Medicos</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered table-md">
+            <tbody>
+              <tr>
+                <th class="w100">Avatar</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+
+                <th class="w150">Acciones</th>
+              </tr>
+              <tr *ngFor="let medico of medicos">
+                <td>
+                  <img src="" alt="" />
+                </td>
+                <td>nombre</td>
+
+                <td><div class="badge badge-success">Active</div></td>
+                <td>
+                  <a href="#" class="btn btn-icon btn-success"
+                    ><i class="far fa-edit fa-lg"></i></a
+                  >&nbsp;
+                  <a href="#" class="btn btn-icon btn-danger"
+                    ><i class="fas fa-trash-alt fa-lg"></i
+                  ></a>
+                  <!-- <i class="fas fa-user-edit fa-lg"></i> &nbsp;
+                  <i class="far fa-trash-alt fa-lg"></i> -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- <div class="card-footer text-left">
+        <nav class="d-inline-block">
+          <ul class="pagination mb-0">
+            <li class="page-item">
+              <a class="page-link" href="#" tabindex="-1"
+                ><i class="fas fa-chevron-left"></i
+              ></a>
+            </li>
+            <li class="page-item active">
+              <a class="page-link" href="#"
+                >1 <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#"
+                ><i class="fas fa-chevron-right"></i
+              ></a>
+            </li>
+          </ul>
+        </nav>
+      </div> -->
+    </div>
+  </div>
+</div>

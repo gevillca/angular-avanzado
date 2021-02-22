@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { User } from '../models/users.models';
+import { Hospital } from '../models/hospitales.model';
 const base_url = environment.base_url;
 
 @Injectable({
@@ -39,6 +40,9 @@ export class SearchsService {
         )
     );
   }
+  private transformarHospitales(res: any[]): Hospital[] {
+    return res;
+  }
 
   search(tipo: 'users' | 'medicos' | 'hospitales', term: string) {
     return this.http
@@ -48,6 +52,8 @@ export class SearchsService {
           switch (tipo) {
             case 'users':
               return this.transformarUsuarios(res.data);
+            case 'hospitales':
+              return this.transformarHospitales(res.data);
 
             default:
               break;

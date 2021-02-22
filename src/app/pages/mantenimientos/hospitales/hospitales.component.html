@@ -1,0 +1,139 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input
+          class="form-control"
+          type="text"
+          name=""
+          placeholder="Buscar Hospitales"
+          (keyup)="searchHospital(termino.value)"
+          #termino
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="cargando">
+  <div class="col-12">
+    <div class="alert alert-info text-center">
+      <h4 class="alert-heading">Cargando</h4>
+      <i class="fas fa-spinner fa-spin fa-5x"></i>
+      <p class="mb-0">Por favor Espere</p>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="!cargando">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-8">
+            <div class="card-header">
+              <h4>Hospitales ({{ hospitales.length }})</h4>
+            </div>
+          </div>
+          <div class="col">
+            <div class="text-right">
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                (click)="abrirSweelAlert()"
+              >
+                <i class="fas fa-hospital" aria-hidden="true"></i> Crear
+                Hospital
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-bordered table-md">
+            <tbody>
+              <tr>
+                <th class="w100">Foto</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th class="w150">Acciones</th>
+              </tr>
+              <tr *ngFor="let hospital of hospitales">
+                <td class="text-center">
+                  <img
+                    [src]="hospital.hospital_img | imagen: 'hospitales'"
+                    class="w100 avatar cursor"
+                    alt=""
+                    (click)="openModal(hospital)"
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Nombre Hospital"
+                    [(ngModel)]="hospital.hospital_name"
+                  />
+                </td>
+                <td>
+                  <div
+                    class="badge badge-success"
+                    *ngIf="hospital.hospital_state"
+                  >
+                    Active
+                  </div>
+                </td>
+                <td>
+                  <!-- <a
+                    class="btn btn-icon btn-primary"
+                    (click)="saveChanges(hospital)"
+                    ><i class="far fa-save fa-lg"></i
+                  ></a> -->
+
+                  <button
+                    class="btn btn-primary"
+                    (click)="saveChanges(hospital)"
+                  >
+                    <i class="far fa-save fa-lg"></i>
+                  </button>
+                  &nbsp;
+                  <button
+                    class="btn btn-danger"
+                    (click)="deleteHospital(hospital)"
+                  >
+                    <i class="fas fa-trash-alt fa-lg cursor"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- tarea extra la paginacion -->
+      <!-- <div class="card-footer text-left">
+        <nav class="d-inline-block">
+          <ul class="pagination mb-0">
+            <li class="page-item">
+              <a class="page-link" href="#" tabindex="-1"
+                ><i class="fas fa-chevron-left"></i
+              ></a>
+            </li>
+            <li class="page-item active">
+              <a class="page-link" href="#"
+                >1 <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#"
+                ><i class="fas fa-chevron-right"></i
+              ></a>
+            </li>
+          </ul>
+        </nav>
+      </div> -->
+    </div>
+  </div>
+</div>
