@@ -1,24 +1,98 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MedicoService } from '../../../services/medico.service';
 import { Medico } from '../../../models/medicos.model';
+import { ModalImagenService } from '../../../services/modal-imagen.service';
+import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
+import { SearchsService } from '../../../services/searchs.service';
 
 @Component({
   selector: 'app-medicos',
   templateUrl: './medicos.component.html',
   styles: [],
 })
-export class MedicosComponent implements OnInit {
+export class MedicosComponent implements OnInit, OnDestroy {
+  public cargando: boolean = true;
   public medicos: Medico[] = [];
-  constructor(private medicoService: MedicoService) {}
-
-  ngOnInit() {
-    this.loadMedico();
+  public imgSubs: Subscription;
+  constructor(
+    private medicoService: MedicoService,
+    private modalImagenService: ModalImagenService,
+    private searchService: SearchsService
+  ) {}
+  //elimina los cambios que se esten escuchando en el listening
+  ngOnDestroy() {
+    this.imgSubs.unsubscribe();
   }
 
-  loadMedico() {
-    this.medicoService.getMedico().subscribe((resp) => {
-      this.medicos = resp;
-      console.log(resp);
+  ngOnInit() {
+    this.cargarMedico();
+    this.imgSubs = this.modalImagenService.nuevaImagen.subscribe((img) => {
+      this.cargarMedico();
+    });
+  }
+
+  cargarMedico() {
+    this.cargando = true;
+    this.medicoService.getMedico().subscribe((medico) => {
+      this.cargando = false;
+      this.medicos = medico;
+    });
+  }
+  //abre un modal para cambiar la imagen
+  openModal(medico: Medico) {
+    this.modalImagenService.openModal(
+      'medicos',
+      medico.medico_id,
+      medico.medico_img
+    );
+  }
+  async abrirSweelAlert() {
+    const { value = '' } = await Swal.fire<string>({
+      title: 'Crear un Medico',
+      text: 'Ingrese el nuevo nombre del nuevo Medico',
+      input: 'text',
+      inputPlaceholder: 'Nombre del Medico',
+      showCancelButton: true,
+    });
+    if (value.trim().length > 0) {
+      this.medicoService.createMedico(value).subscribe((resp) => {
+        console.log(resp);
+        this.cargarMedico();
+      });
+    }
+  }
+  //busca un medico a travez de un termino escrito
+  searchMedico(term: string) {
+    if (term.length === 0) {
+      return this.cargarMedico();
+    }
+
+    this.searchService.search('medicos', term).subscribe((res: any) => {
+      this.medicos = res;
+    });
+  }
+
+  deleteMedico(medico: Medico) {
+    Swal.fire({
+      title: `¿Borrar Un Medico?`,
+      text: `¿Esta Seguro de Eliminar a ${medico.medico_name}?`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminarlo!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.medicoService.deleteMedico(medico.medico_id).subscribe(() => {
+          Swal.fire(
+            'Medico borrado!',
+            `Medico ${medico.medico_name} fue eliminado correctamente`,
+            'success'
+          );
+          this.cargarMedico();
+        });
+      }
     });
   }
 }

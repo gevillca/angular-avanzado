@@ -21,10 +21,6 @@ export class ModalImagenService {
     user_id: string,
     user_img: string
   ) {
-    console.log('modal-img-tipo', tipo);
-    console.log('modal-img-id', user_id);
-    console.log('modal-img-img', user_img);
-
     this.tipo = tipo;
     this.user_id = user_id;
     this.user_img = user_img;
@@ -35,7 +31,6 @@ export class ModalImagenService {
       this.user_img = user_img;
     } else {
       this.user_img = `${base_url}/upload/${tipo}/${user_img}`;
-      console.log(user_img);
     }
   }
   closeModal() {

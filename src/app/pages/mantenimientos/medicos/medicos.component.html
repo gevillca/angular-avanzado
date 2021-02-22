@@ -7,12 +7,14 @@
           type="text"
           name=""
           placeholder="Buscar Medico"
+          (keyup)="searchMedico(termino.value)"
+          #termino
         />
       </div>
     </div>
   </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="cargando">
   <div class="col-12">
     <div class="alert alert-info text-center">
       <h4 class="alert-heading">Cargando</h4>
@@ -24,13 +26,28 @@
     </div>
   </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="!cargando">
   <div class="col-12">
     <div class="card">
-      <div class="card-header">
-        <h4>Medicos</h4>
-      </div>
       <div class="card-body">
+        <div class="row">
+          <div class="col-8">
+            <div class="card-header">
+              <h4>Medicos ({{ medicos.length }})</h4>
+            </div>
+          </div>
+          <div class="col">
+            <div class="text-right">
+              <a
+                class="btn btn-outline-primary"
+                [routerLink]="['/dashboard/medico/nuevo']"
+              >
+                <i class="fas fa-user-md" aria-hidden="true"></i> Crear Medico
+              </a>
+            </div>
+          </div>
+        </div>
+
         <div class="table-responsive">
           <table class="table table-bordered table-md">
             <tbody>
@@ -43,18 +60,25 @@
               </tr>
               <tr *ngFor="let medico of medicos">
                 <td>
-                  <img src="" alt="" />
+                  <img
+                    [src]="medico.medico_img | imagen: 'medicos'"
+                    class="w100 avatar cursor"
+                    alt=""
+                    (click)="openModal(medico)"
+                  />
                 </td>
-                <td>nombre</td>
+                <td>{{ medico.medico_name }}</td>
 
                 <td><div class="badge badge-success">Active</div></td>
                 <td>
-                  <a href="#" class="btn btn-icon btn-success"
+                  <a
+                    [routerLink]="['/dashboard', 'medico', medico_id]"
+                    class="btn btn-icon btn-success"
                     ><i class="far fa-edit fa-lg"></i></a
                   >&nbsp;
-                  <a href="#" class="btn btn-icon btn-danger"
-                    ><i class="fas fa-trash-alt fa-lg"></i
-                  ></a>
+                  <button class="btn btn-danger" (click)="deleteMedico(medico)">
+                    <i class="fas fa-trash-alt fa-lg cursor"></i>
+                  </button>
                   <!-- <i class="fas fa-user-edit fa-lg"></i> &nbsp;
                   <i class="far fa-trash-alt fa-lg"></i> -->
                 </td>

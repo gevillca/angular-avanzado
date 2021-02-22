@@ -29,4 +29,18 @@ export class MedicoService {
       })
     );
   }
+
+  createMedico(medico_name: string) {
+    return this.http.post(`${base_url}/medicos`, { medico_name }, this.headers);
+  }
+  updateMedico(medico_id: string, medico_name: string) {
+    return this.http.put(
+      `${base_url}/medicos/${medico_id}`,
+      { medico_name },
+      this.headers
+    );
+  }
+  deleteMedico(_id: string) {
+    return this.http.delete(`${base_url}/medicos/${_id}`, this.headers);
+  }
 }

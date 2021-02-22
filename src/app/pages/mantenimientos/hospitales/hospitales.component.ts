@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Hospital } from 'src/app/models/hospitales.model';
 import { HospitalService } from 'src/app/services/hospital.service';
 import Swal from 'sweetalert2';
 import { ModalImagenService } from '../../../services/modal-imagen.service';
 import { Subscription } from 'rxjs';
-import { LoginComponent } from '../../../auth/login/login.component';
 import { SearchsService } from '../../../services/searchs.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { SearchsService } from '../../../services/searchs.service';
   templateUrl: './hospitales.component.html',
   styles: [],
 })
-export class HospitalesComponent implements OnInit {
+export class HospitalesComponent implements OnInit, OnDestroy {
   public hospitales: Hospital[] = [];
   public cargando: boolean = true;
   public imgSubs: Subscription;
@@ -27,6 +26,10 @@ export class HospitalesComponent implements OnInit {
     this.imgSubs = this.modalImagenService.nuevaImagen.subscribe((img) => {
       this.cargarHospital();
     });
+  }
+  //elimina los cambios que se esten escuchando en el listening
+  ngOnDestroy() {
+    this.imgSubs.unsubscribe();
   }
 
   cargarHospital() {
@@ -70,7 +73,7 @@ export class HospitalesComponent implements OnInit {
       }
     });
   }
-
+  //abre una alerta para crear un hospital
   async abrirSweelAlert() {
     const { value = '' } = await Swal.fire<string>({
       title: 'Crear un Hospital',
@@ -86,19 +89,16 @@ export class HospitalesComponent implements OnInit {
       });
     }
   }
+  //abre un modal para cambiar la imagen
   openModal(hospital: Hospital) {
-    console.log(hospital);
-
     this.modalImagenService.openModal(
       'hospitales',
       hospital.hospital_id,
       hospital.hospital_img
     );
   }
-  // openModal(user: User) {
-  //   this.modalImagenService.openModal('users', user.user_id, user.user_img);
-  // }
 
+  //busca un medico a travez de un termino escrito
   searchHospital(term: string) {
     if (term.length === 0) {
       return this.cargarHospital();
