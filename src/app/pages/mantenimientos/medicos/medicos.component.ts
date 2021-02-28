@@ -34,7 +34,7 @@ export class MedicosComponent implements OnInit, OnDestroy {
 
   cargarMedico() {
     this.cargando = true;
-    this.medicoService.getMedico().subscribe((medico) => {
+    this.medicoService.getMedicos().subscribe((medico) => {
       this.cargando = false;
       this.medicos = medico;
     });
@@ -47,21 +47,7 @@ export class MedicosComponent implements OnInit, OnDestroy {
       medico.medico_img
     );
   }
-  async abrirSweelAlert() {
-    const { value = '' } = await Swal.fire<string>({
-      title: 'Crear un Medico',
-      text: 'Ingrese el nuevo nombre del nuevo Medico',
-      input: 'text',
-      inputPlaceholder: 'Nombre del Medico',
-      showCancelButton: true,
-    });
-    if (value.trim().length > 0) {
-      this.medicoService.createMedico(value).subscribe((resp) => {
-        console.log(resp);
-        this.cargarMedico();
-      });
-    }
-  }
+
   //busca un medico a travez de un termino escrito
   searchMedico(term: string) {
     if (term.length === 0) {

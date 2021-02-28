@@ -22,21 +22,37 @@ export class MedicoService {
   }
 
   // obtine los medicos, y usa el pipe y map solo para obtener los medicos sin el ok:true
-  getMedico() {
+  getMedicos() {
     return this.http.get(`${base_url}/medicos`, this.headers).pipe(
       map((resp: { ok: boolean; data: Medico[] }) => {
         return resp.data;
       })
     );
   }
-
-  createMedico(medico_name: string) {
-    return this.http.post(`${base_url}/medicos`, { medico_name }, this.headers);
+  getMedicoById(id: string) {
+    return this.http.get(`${base_url}/medicos/${id}`, this.headers).pipe(
+      map((resp: { ok: boolean; data: Medico }) => {
+        return resp.data;
+      })
+    );
   }
-  updateMedico(medico_id: string, medico_name: string) {
+
+  createMedico(medico_name: string, medico_hospital_id: string) {
+    return this.http.post(
+      `${base_url}/medicos`,
+      { medico_name, medico_hospital_id },
+      this.headers
+    );
+  }
+
+  updateMedico(medico: Medico, medico_id: string) {
+    console.log(medico_id);
+
+    console.log('medicoService', medico);
+
     return this.http.put(
       `${base_url}/medicos/${medico_id}`,
-      { medico_name },
+      medico,
       this.headers
     );
   }
