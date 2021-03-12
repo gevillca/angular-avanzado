@@ -77,23 +77,15 @@
                     routerLinkActive="active"
                     [routerLinkActiveOptions]="{ exact: true }"
                   >
-                    <a [routerLink]="submenu.url" class="nav-link cursor">
+                    <a
+                      [routerLink]="submenu.url"
+                      class="nav-link cursor"
+                      data-widget="pushmenu"
+                    >
                       <i [class]="submenu.icono"></i>
                       <p>{{ submenu.titulo }}</p>
                     </a>
                   </li>
-                  <!-- <li class="nav-item">
-                    <a href="../../index2.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Dashboard v2</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="../../index3.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Dashboard v3</p>
-                    </a>
-                  </li> -->
                 </ul>
               </li>
               <li class="nav-item">

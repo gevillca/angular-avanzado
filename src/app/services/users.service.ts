@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment.prod';
+import { environment } from '../../environments/environment';
 import { RegisterForm } from '../interfaces/register-form-interface';
 import { LoginForm } from '../interfaces/login-form.interface';
 import { catchError, map, tap } from 'rxjs/operators';

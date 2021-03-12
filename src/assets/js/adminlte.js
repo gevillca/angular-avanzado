@@ -3370,3 +3370,4 @@ const customInitFunction = () => {
   //# sourceMappingURL=adminlte.js.map
 };
 
+customInitFunction();

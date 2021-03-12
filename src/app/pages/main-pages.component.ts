@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SettingsService } from '../services/settings.service';
 
-declare function customInitFunction();
+// declare function customInitFunction();
+declare var $: any;
 @Component({
   selector: 'app-main-pages',
   templateUrl: './main-pages.component.html',
@@ -11,6 +12,7 @@ export class MainPagesComponent implements OnInit {
   constructor(private settingsService: SettingsService) {}
 
   ngOnInit() {
-    customInitFunction();
+    $('[data-widget="treeview"]').Treeview('init');
+    // customInitFunction();
   }
 }
