@@ -13,13 +13,10 @@ export class RegisterComponent {
 
   public registerForm = this.fb.group(
     {
-      user_name: ['Tavo', Validators.required],
-      user_email: [
-        'tavo222@prisma.io',
-        [Validators.required, Validators.email],
-      ],
-      user_password: ['123', Validators.required],
-      user_password2: ['123', Validators.required],
+      user_name: ['', Validators.required],
+      user_email: ['', [Validators.required, Validators.email]],
+      user_password: ['', Validators.required],
+      user_password2: ['', Validators.required],
       user_terminos: [true, Validators.required],
     },
     {
@@ -43,6 +40,12 @@ export class RegisterComponent {
       (resp: any) => {
         this.router.navigate(['/']);
         // this.router.navigate(['/login']);
+        Swal.fire(
+          'Se registrado Exitosamente',
+          this.registerForm.value.user_name,
+          'success'
+        );
+
         this.router.navigateByUrl('/login');
       },
       (err) => {

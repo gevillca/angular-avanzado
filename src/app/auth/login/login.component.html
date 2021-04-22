@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<!--
   <div class="row">
     <div
       class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4"
@@ -102,5 +102,104 @@
       </div>
       <div class="simple-footer">Copyright &copy; Stisla 2018</div>
     </div>
+  </div>
+</div> -->
+<div class="login-page">
+  <div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+      <div class="card-header text-center">
+        <a routerLink="/login" class="h1">Register</a>
+      </div>
+      <div class="card-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+
+        <form (ngSubmit)="login()" autocomplete="off" [formGroup]="loginForm">
+          <div class="input-group mb-3">
+            <input
+              id="email"
+              type="email"
+              class="form-control"
+              name="user_email"
+              placeholder="Email"
+              formControlName="user_email"
+              placeholder="Email"
+            />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input
+              id="password"
+              type="password"
+              class="form-control"
+              name="user_password"
+              placeholder="Password"
+              formControlName="user_password"
+            />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div class="icheck-primary">
+                <input
+                  type="checkbox"
+                  name="remember"
+                  class="custom-control-input"
+                  tabindex="3"
+                  id="remember-me"
+                  formControlName="remember"
+                />
+                <label for="remember-me"> Remember Me </label>
+              </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+              <button
+                type="submit"
+                class="btn btn-primary btn-block"
+                [disabled]="loginForm.invalid"
+              >
+                Sign In
+              </button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+        <br />
+
+        <div class="social-auth-links text-center mt-2 mb-5">
+          <div
+            class="col-xs12 col-sm-12 col-md-12 m-t-10 text-center mb-4"
+            id="google-btn"
+          >
+            <div id="my-signin2"></div>
+          </div>
+        </div>
+        <!-- /.social-auth-links -->
+
+        <!-- <p class="mb-1">
+          <a href="forgot-password.html">I forgot my password</a>
+        </p> -->
+        <div class="mt-5 text-muted text-center">
+          Don't have an account? <a routerLink="/register">Create One</a>
+        </div>
+
+        <!-- <p class="mb-0">
+          <a href="register.html" class="text-center"
+            >Register a new membership</a
+          >
+        </p> -->
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
   </div>
 </div>
