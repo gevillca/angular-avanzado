@@ -46,7 +46,7 @@
                 <ul class="nav nav-treeview" style="display: none">
                   <li class="nav-item" *ngFor="let submenu of items.submenu" routerLinkActive="active"
                     [routerLinkActiveOptions]="{ exact: true }">
-                    <a [routerLink]="submenu.url" class="nav-link cursor" data-widget="pushmenu">
+                    <a [routerLink]="submenu.url" class="nav-link cursor">
                       <i [class]="submenu.icono"></i>
                       <p>{{ submenu.titulo }}</p>
                     </a>

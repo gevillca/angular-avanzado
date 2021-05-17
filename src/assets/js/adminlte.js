@@ -1799,9 +1799,8 @@ const customInitFunction = () => {
           var contentWrapperHeight = parseFloat(
             $__default['default'](SELECTOR_CONTENT_WRAPPER).css('min-height')
           );
-          var navbarHeight = $__default['default'](
-            SELECTOR_TAB_NAV
-          ).outerHeight();
+          var navbarHeight =
+            $__default['default'](SELECTOR_TAB_NAV).outerHeight();
 
           if (tabEmpty == true) {
             setTimeout(function () {
@@ -3370,3 +3369,4 @@ const customInitFunction = () => {
   //# sourceMappingURL=adminlte.js.map
 };
 
+customInitFunction();
