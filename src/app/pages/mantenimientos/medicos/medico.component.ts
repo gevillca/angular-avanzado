@@ -68,8 +68,6 @@ export class MedicoComponent implements OnInit {
   guardar() {
     // const { medico_name } = this.medicoForms.value;
     if (this.medicoseleccionado) {
-      console.log(this.medicoForms.value);
-
       const id = this.medicoseleccionado.medico_id;
 
       this.medicoService

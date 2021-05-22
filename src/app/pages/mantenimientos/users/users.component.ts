@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { UserOptions } from 'jspdf-autotable';
-
+import { PdfModalService } from 'src/app/services/pdf-modal.service';
 interface jsPDFWithPlugin extends jsPDF {
   autoTable: (options: UserOptions) => jsPDF;
 }
@@ -19,6 +19,9 @@ interface jsPDFWithPlugin extends jsPDF {
   styles: [],
 })
 export class UsersComponent implements OnInit, OnDestroy {
+  // @ViewChild('myDiv') myDiv: ElementRef;
+  // @ViewChild('canvas') canvas: ElementRef;
+  // @ViewChild('downloadLink') downloadLink: ElementRef;
   public totalUser: number = 0;
   public usuarios: User[] = [];
   public usuariosPDF: User[] = [];
@@ -30,13 +33,25 @@ export class UsersComponent implements OnInit, OnDestroy {
   constructor(
     public userService: UsersService,
     private searchService: SearchsService,
-    private modalImagenService: ModalImagenService
+    private modalImagenService: ModalImagenService,
+    public pdfModalService: PdfModalService
   ) {
     // this.myAngularxQrCode = 'Your QR code data string';
+    // console.log(this.myDiv.nativeElement);
   }
+
   ngOnDestroy(): void {
     this.imgSubs.unsubscribe();
   }
+
+  // imagenpdf() {
+  //   html2canvas(this.myDiv.nativeElement).then((canvas) => {
+  //     this.canvas.nativeElement.src = canvas.toDataURL();
+  //     this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+  //     this.downloadLink.nativeElement.download = 'marble-diagram.png';
+  //     this.downloadLink.nativeElement.click();
+  //   });
+  // }
 
   ngOnInit(): void {
     this.loadUser();
@@ -52,7 +67,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     var columns = [['Email', 'Nombres', 'Estado']];
     var data = [];
     this.usuariosTemporal.forEach((x) => {
-      console.log(x);
       data.push([x.user_email, x.user_name, x.user_state]);
     });
     doc.autoTable({
@@ -62,18 +76,10 @@ export class UsersComponent implements OnInit, OnDestroy {
         doc.setFontSize(20);
         doc.setTextColor(40);
         // doc.setFontStyle('normal');
-        doc.text('Listado de Usarios', dataArg.settings.margin.left, 60);
+        doc.text('Listado de Usarios', dataArg.settings.margin.left, 20);
       },
     });
-    // doc.autoTable(columns, data);
-    // // doc.output('dataurlnewwindow');
-
-    // autoTable(doc, {
-    //   head: columns,
-    //   body: data,
-    // });
-
-    doc.save('table.pdf');
+    doc.save('reporte_usuarios.pdf');
   }
   loadUser() {
     this.load = true;

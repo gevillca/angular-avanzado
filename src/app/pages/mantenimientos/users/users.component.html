@@ -21,13 +21,16 @@
   </div>
 </div>
 <div class="row" *ngIf="!load">
-  <div class="col-12">
+  <div #myDiv class="col-12">
     <div class="card">
       <div class="card-header">
         <h4>Total Usuarios: {{ totalUser }} - {{ desde }}</h4>
         <button class="btn btn-outline-primary btn-small" (click)="crearPDF()"><i class="fa fa-print"
             aria-hidden="true">Imprimir</i></button>
       </div>
+
+
+
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-bordered table-md" id="mytabla">
@@ -71,7 +74,8 @@
                   <button [disabled]="user.user_id === userService.user_id" (click)="deleteUser(user)"
                     class="btn btn-danger">
                     <i class="fas fa-trash-alt fa-lg"></i>
-                  </button>
+                  </button>&nbsp;
+
                 </td>
               </tr>
             </tbody>
