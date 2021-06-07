@@ -2,13 +2,8 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <input
-          class="form-control"
-          type="text"
-          placeholder="Buscar Usuario..."
-          (keyup)="searchUser(termino.value)"
-          #termino
-        />
+        <input class="form-control" type="text" placeholder="Buscar Usuario..." (keyup)="searchUser(termino.value)"
+          #termino />
       </div>
     </div>
   </div>
@@ -26,14 +21,19 @@
   </div>
 </div>
 <div class="row" *ngIf="!load">
-  <div class="col-12">
+  <div #myDiv class="col-12">
     <div class="card">
       <div class="card-header">
         <h4>Total Usuarios: {{ totalUser }} - {{ desde }}</h4>
+        <button class="btn btn-outline-primary btn-small" (click)="crearPDF()"><i class="fa fa-print"
+            aria-hidden="true">Imprimir</i></button>
       </div>
+
+
+
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-bordered table-md">
+          <table class="table table-bordered table-md" id="mytabla">
             <tbody>
               <tr>
                 <th class="w100 text-center">Avatar</th>
@@ -46,33 +46,21 @@
               </tr>
               <tr *ngFor="let user of usuarios">
                 <td class="text-center">
-                  <img
-                    [src]="user.user_img | imagen: 'users'"
-                    alt="Imagen de Avatar"
-                    class="profile-user-img img-fluid img-circle cursor"
-                    (click)="openModal(user)"
-                  />
+                  <img [src]="user.user_img | imagen: 'users'" alt="Imagen de Avatar"
+                    class="profile-user-img img-fluid img-circle cursor" (click)="openModal(user)" />
                 </td>
                 <td>{{ user.user_email }}</td>
                 <td>{{ user.user_name }}</td>
                 <td>
-                  <select
-                    class="form-control"
-                    [(ngModel)]="user.user_role"
-                    (change)="changeRole(user)"
-                  >
+                  <select class="form-control" [(ngModel)]="user.user_role" (change)="changeRole(user)">
                     <option value="ADMIN_ROLE">ADMIN</option>
                     <option value="USER_ROLE">USER</option>
                   </select>
                 </td>
                 <!-- class="text-center">{{ user.user_role }} -->
                 <td class="text-center">
-                  <span *ngIf="user.user_google" class="badge badge-danger"
-                    >Google</span
-                  >
-                  <span *ngIf="!user.user_google" class="badge badge-info"
-                    >Email</span
-                  >
+                  <span *ngIf="user.user_google" class="badge badge-danger">Google</span>
+                  <span *ngIf="!user.user_google" class="badge badge-info">Email</span>
                 </td>
                 <td class="text-center">
                   <div *ngIf="user.user_state" class="badge badge-success">
@@ -83,13 +71,11 @@
                   </div>
                 </td>
                 <td class="text-center">
-                  <button
-                    [disabled]="user.user_id === userService.user_id"
-                    (click)="deleteUser(user)"
-                    class="btn btn-danger"
-                  >
+                  <button [disabled]="user.user_id === userService.user_id" (click)="deleteUser(user)"
+                    class="btn btn-danger">
                     <i class="fas fa-trash-alt fa-lg"></i>
-                  </button>
+                  </button>&nbsp;
+
                 </td>
               </tr>
             </tbody>
@@ -100,14 +86,10 @@
         <nav class="d-inline-block">
           <ul class="pagination mb-0">
             <li class="page-item">
-              <a class="page-link cursor" (click)="changePage(-5)"
-                ><i class="fas fa-chevron-left"></i>Anterior</a
-              >
+              <a class="page-link cursor" (click)="changePage(-5)"><i class="fas fa-chevron-left"></i>Anterior</a>
             </li>
             <li class="page-item">
-              <a class="page-link cursor" (click)="changePage(5)"
-                >Siguiente<i class="fas fa-chevron-right"></i
-              ></a>
+              <a class="page-link cursor" (click)="changePage(5)">Siguiente<i class="fas fa-chevron-right"></i></a>
             </li>
           </ul>
         </nav>

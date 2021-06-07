@@ -31,6 +31,15 @@ export class HospitalService {
       })
     );
   }
+  getHospitalID(hospital_id: string) {
+    return this.http
+      .get(`${base_url}/hospitales/${hospital_id}`, this.headers)
+      .pipe(
+        map((resp: { ok: boolean; data: Hospital[] }) => {
+          return resp.data;
+        })
+      );
+  }
   createHospital(hospital_name: string) {
     return this.http.post(
       `${base_url}/hospitales`,

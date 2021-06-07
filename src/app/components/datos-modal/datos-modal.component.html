@@ -1,0 +1,90 @@
+<div class="fondo-modal-imagen" [class.oculto]="pdfModalService.hideModal">
+  <div class="modal fade show" id="exampleModalXl" tabindex="-1" aria-labelledby="exampleModalXlLabel"
+    style="display: block; padding-right: 14px;" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <!-- <h5 class="modal-title h4" id="exampleModalXlLabel">  -->
+          <button (click)="crearPDF()" class="btn btn-default"><i class="fa fa-print"
+              aria-hidden="true">Imprimir</i></button>
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cerrarModalPDF()">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+
+            <div #reportePDF class="col-12">
+
+              <h3 class="text-center">Reporte Medico</h3>
+              <hr>
+              <div class="col-12">
+                <!-- Widget: user widget style 1 -->
+                <div class="card card-widget widget-user shadow">
+                  <!-- Add the bg color to the header using any of the bg-* classes -->
+                  <div class="widget-user-header bg-info">
+                    <h3 class="widget-user-username">{{pdfModalService.medico_name }}</h3>
+                    <h5 class="widget-user-desc"> <strong>HOSPITAL:</strong>{{pdfModalService.hospital_name}}</h5>
+                  </div>
+                  <div class="widget-user-image img-fluid">
+                    <img class="img-circle elevation-2" [src]="pdfModalService.medico_img64" alt="User Avatar">
+                  </div>
+                  <div class="card-footer">
+                    <div class="row">
+                      <div class="col-sm-4 border-right">
+                        <div class="description-block">
+                          <h5 class="description-header">ESPECIALIDAD</h5>
+                          <span class="description-text">DR. CIRUJANO</span>
+                        </div>
+                        <!-- /.description-block -->
+                      </div>
+                      <!-- /.col -->
+                      <div class="col-sm-4 border-right">
+                        <div class="description-block">
+                          <h5 class="description-header">TURNO</h5>
+                          <span class="description-text">TARDE</span>
+                        </div>
+                        <!-- /.description-block -->
+                      </div>
+                      <!-- /.col -->
+                      <div class="col-sm-4">
+                        <div class="description-block">
+                          <h5 class="description-header">ITEM</h5>
+                          <span class="description-text">SI</span>
+                        </div>
+                        <!-- /.description-block -->
+                      </div>
+                      <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                  </div>
+                </div>
+                <!-- /.widget-user -->
+                <hr>
+                <div class="text-center">
+                  <div>
+                    <!-- <qr-code [value]="'All QR Code data goes here!'" [size]="150"></qr-code> -->
+                    <qrcode [qrdata]="pdfModalService.medico_name+'|'+pdfModalService.hospital_name" [width]="200"
+                      [errorCorrectionLevel]="'M'" [elementType]="'svg'">
+                    </qrcode>
+
+                  </div>
+                </div>
+                <hr>
+                <div class="text-center">
+                  <strong>cossmil - 2021 </strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

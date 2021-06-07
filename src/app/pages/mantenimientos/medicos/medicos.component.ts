@@ -1,3 +1,4 @@
+import { PdfModalService } from 'src/app/services/pdf-modal.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MedicoService } from '../../../services/medico.service';
 import { Medico } from '../../../models/medicos.model';
@@ -18,7 +19,8 @@ export class MedicosComponent implements OnInit, OnDestroy {
   constructor(
     private medicoService: MedicoService,
     private modalImagenService: ModalImagenService,
-    private searchService: SearchsService
+    private searchService: SearchsService,
+    private pdfModalService: PdfModalService
   ) {}
   //elimina los cambios que se esten escuchando en el listening
   ngOnDestroy() {
@@ -80,5 +82,8 @@ export class MedicosComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+  abrirlModalPDf(medico: Medico) {
+    this.pdfModalService.abrirlModal(medico, 'medicos');
   }
 }

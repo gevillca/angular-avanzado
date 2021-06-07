@@ -2,14 +2,8 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <input
-          class="form-control"
-          type="text"
-          name=""
-          placeholder="Buscar Medico"
-          (keyup)="searchMedico(termino.value)"
-          #termino
-        />
+        <input class="form-control" type="text" name="" placeholder="Buscar Medico"
+          (keyup)="searchMedico(termino.value)" #termino />
       </div>
     </div>
   </div>
@@ -38,10 +32,7 @@
           </div>
           <div class="col">
             <div class="text-right">
-              <a
-                class="btn btn-outline-primary"
-                [routerLink]="['/dashboard/medico/nuevo']"
-              >
+              <a class="btn btn-outline-primary" [routerLink]="['/dashboard/medico/nuevo']">
                 <i class="fas fa-user-md" aria-hidden="true"></i> Crear Medico
               </a>
             </div>
@@ -56,29 +47,26 @@
                 <th>Nombre</th>
                 <th>Estado</th>
 
-                <th class="w150">Acciones</th>
+                <th class="w-25">Acciones</th>
               </tr>
               <tr *ngFor="let medico of medicos">
                 <td>
-                  <img
-                    [src]="medico.medico_img | imagen: 'medicos'"
-                    class="w100 avatar cursor"
-                    alt=""
-                    (click)="openModal(medico)"
-                  />
+                  <img [src]="medico.medico_img | imagen: 'medicos'" class="w100 avatar cursor" alt=""
+                    (click)="openModal(medico)" />
                 </td>
                 <td>{{ medico.medico_name }}</td>
 
-                <td><div class="badge badge-success">Active</div></td>
                 <td>
-                  <a
-                    [routerLink]="['/dashboard', 'medico', medico.medico_id]"
-                    class="btn btn-icon btn-success"
-                    ><i class="far fa-edit fa-lg"></i></a
-                  >&nbsp;
+                  <div class="badge badge-success">Active</div>
+                </td>
+                <td>
+                  <a [routerLink]="['/dashboard', 'medico', medico.medico_id]" class="btn btn-icon btn-success"><i
+                      class="far fa-edit fa-lg"></i></a>&nbsp;
                   <button class="btn btn-danger" (click)="deleteMedico(medico)">
                     <i class="fas fa-trash-alt fa-lg cursor"></i>
-                  </button>
+                  </button>&nbsp;
+                  <button class="btn btn-info" (click)="abrirlModalPDf(medico)"><i class="fa fa-print"
+                      aria-hidden="true"></i></button>
                   <!-- <i class="fas fa-user-edit fa-lg"></i> &nbsp;
                   <i class="far fa-trash-alt fa-lg"></i> -->
                 </td>

@@ -5,6 +5,13 @@ import { SearchsService } from '../../../services/searchs.service';
 import Swal from 'sweetalert2';
 import { ModalImagenService } from '../../../services/modal-imagen.service';
 import { Subscription } from 'rxjs';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import { UserOptions } from 'jspdf-autotable';
+import { PdfModalService } from 'src/app/services/pdf-modal.service';
+interface jsPDFWithPlugin extends jsPDF {
+  autoTable: (options: UserOptions) => jsPDF;
+}
 
 @Component({
   selector: 'app-users',
@@ -12,20 +19,39 @@ import { Subscription } from 'rxjs';
   styles: [],
 })
 export class UsersComponent implements OnInit, OnDestroy {
+  // @ViewChild('myDiv') myDiv: ElementRef;
+  // @ViewChild('canvas') canvas: ElementRef;
+  // @ViewChild('downloadLink') downloadLink: ElementRef;
   public totalUser: number = 0;
   public usuarios: User[] = [];
+  public usuariosPDF: User[] = [];
   public usuariosTemporal: User[] = [];
   public desde: number = 0;
   public load = false;
   public imgSubs: Subscription;
+  // public myAngularxQrCode: any;
   constructor(
     public userService: UsersService,
     private searchService: SearchsService,
-    private modalImagenService: ModalImagenService
-  ) {}
+    private modalImagenService: ModalImagenService,
+    public pdfModalService: PdfModalService
+  ) {
+    // this.myAngularxQrCode = 'Your QR code data string';
+    // console.log(this.myDiv.nativeElement);
+  }
+
   ngOnDestroy(): void {
     this.imgSubs.unsubscribe();
   }
+
+  // imagenpdf() {
+  //   html2canvas(this.myDiv.nativeElement).then((canvas) => {
+  //     this.canvas.nativeElement.src = canvas.toDataURL();
+  //     this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+  //     this.downloadLink.nativeElement.download = 'marble-diagram.png';
+  //     this.downloadLink.nativeElement.click();
+  //   });
+  // }
 
   ngOnInit(): void {
     this.loadUser();
@@ -34,6 +60,27 @@ export class UsersComponent implements OnInit, OnDestroy {
     });
   }
 
+  crearPDF() {
+    // let doc = new jsPDF();
+    // let doc = new jsPDF('l', 'pt');
+    const doc = new jsPDF('portrait', 'px', 'a4') as jsPDFWithPlugin;
+    var columns = [['Email', 'Nombres', 'Estado']];
+    var data = [];
+    this.usuariosTemporal.forEach((x) => {
+      data.push([x.user_email, x.user_name, x.user_state]);
+    });
+    doc.autoTable({
+      head: columns,
+      body: data,
+      didDrawPage: (dataArg) => {
+        doc.setFontSize(20);
+        doc.setTextColor(40);
+        // doc.setFontStyle('normal');
+        doc.text('Listado de Usarios', dataArg.settings.margin.left, 20);
+      },
+    });
+    doc.save('reporte_usuarios.pdf');
+  }
   loadUser() {
     this.load = true;
     this.userService.getUsers(this.desde).subscribe(({ total, data }) => {
