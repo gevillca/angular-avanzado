@@ -35,7 +35,7 @@
               data-accordion="false">
               <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-              <li class="nav-item" *ngFor="let items of menuItems">
+              <li class="nav-item" *ngFor="let items of sidebarService.menu">
                 <a class="nav-link cursor">
                   <i [class]="items.icono"></i>
                   <p>

@@ -107,6 +107,8 @@ export class UsersService {
           );
 
           this.guardarLocalStorage(resp.token, resp.menu);
+          console.log('menu usuario:', resp.menu);
+
           // localStorage.setItem('token', resp.token);
           return true;
         }),
@@ -148,6 +150,8 @@ export class UsersService {
       tap((resp: any) => {
         // localStorage.setItem('token', resp.token);
         this.guardarLocalStorage(resp.token, resp.menu);
+
+        console.log('menu usuario:', resp.menu);
       })
     );
   }

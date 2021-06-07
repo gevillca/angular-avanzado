@@ -9,15 +9,15 @@ import { SidebarService } from '../../services/sidebar.service';
   styles: [],
 })
 export class SidebarComponent implements OnInit {
-  menuItems: any[];
+  // menuItems: any[];
   public imgUrl = '';
   public user: User;
   constructor(
-    private sidebarService: SidebarService,
+    public sidebarService: SidebarService,
     private userService: UsersService
   ) {
     this.user = userService.usuario;
-    this.menuItems = sidebarService.menu;
+    // this.menuItems = sidebarService.menu;
     // console.log(this.menuItems);
   }
   logout() {
